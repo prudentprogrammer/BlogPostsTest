@@ -8,11 +8,12 @@ class BlogListViewModel : ObservableObject {
     func fetchBlogPosts() async {
         let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
           do {
-              let (data, dataResponse) = try await URLSession.shared.data(from: url)
+              let (data, _) = try await URLSession.shared.data(from: url)
               let parsedBlogPosts = try JSONDecoder().decode([BlogPost].self, from: data)
               blogPosts = parsedBlogPosts
+              print(blogPosts)
           } catch {
-            print("Error occured")
+            print("Error occured as \(error)")
           }
     }
 }
