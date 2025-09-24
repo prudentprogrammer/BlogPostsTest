@@ -1,9 +1,5 @@
-//
 //  ContentView.swift
 //  BlogPosts
-//
-//  Created by Lakshmi Bharadwaj on 9/24/25.
-//
 
 import SwiftUI
 
