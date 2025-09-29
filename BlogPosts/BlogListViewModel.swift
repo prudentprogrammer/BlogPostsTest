@@ -10,8 +10,10 @@ class BlogListViewModel : ObservableObject {
           do {
               let (data, _) = try await URLSession.shared.data(from: url)
               let parsedBlogPosts = try JSONDecoder().decode([BlogPost].self, from: data)
-              blogPosts = parsedBlogPosts
-              print(blogPosts)
+              await MainActor.run {
+                  blogPosts = parsedBlogPosts
+                  print(blogPosts)
+              }
           } catch {
             print("Error occured as \(error)")
           }

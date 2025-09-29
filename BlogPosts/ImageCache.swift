@@ -6,7 +6,7 @@ class ImageCache {
     static let shared = ImageCache()
     private init() {}
     
-    private var cache = [String:UIImage]()
+    internal var cache = [String:UIImage]()
     
     func getImage(for url: String) -> UIImage? {
         return cache[url]

@@ -6,4 +6,8 @@ struct BlogPost: Codable, Identifiable {
     let id: Int
     let title: String
     let body: String
+    
+    var imageURL: String? {
+        return "https://picsum.photos/id/\(id % 100)/200/200" // Uses a random image service
+    }
 }

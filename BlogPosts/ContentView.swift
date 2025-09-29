@@ -15,12 +15,18 @@ struct ContentView: View {
         } else {
             List {
                 ForEach(viewModel.blogPosts, id: \.id) {post in
-                    Text(post.title)
-                        .font(.headline)
-                    Text(post.body)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .lineLimit(2)
+                    HStack {
+                        if let imageURL = post.imageURL {
+                            PostImageView(url: imageURL)
+                                .frame(width: 80, height: 80)
+                        }
+                        Text(post.title)
+                            .font(.headline)
+                        Text(post.body)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
                 }
             }
             .refreshable {

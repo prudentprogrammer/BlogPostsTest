@@ -4,6 +4,7 @@ import Foundation
 import Combine
 import UIKit
 
+@MainActor
 class ImageLoader: ObservableObject {
     @Published var image: UIImage? = nil
     var url: String = ""
@@ -13,7 +14,9 @@ class ImageLoader: ObservableObject {
     }
     
     func load() async {
-        if let cachedImage = ImageCache.shared.getImage(for: self.url) {
+        let imageCacher = ImageCache.shared
+        print("Cache: \(imageCacher.cache)")
+        if let cachedImage = imageCacher.getImage(for: self.url) {
             await MainActor.run {
                 self.image = cachedImage
             }
@@ -33,7 +36,7 @@ class ImageLoader: ObservableObject {
             }
             
             await MainActor.run {
-                ImageCache.shared.setImage(downloadedImage, for: self.url)
+                imageCacher.setImage(downloadedImage, for: self.url)
                 self.image = downloadedImage
             }
         } catch {
