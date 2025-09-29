@@ -23,6 +23,9 @@ struct ContentView: View {
                         .lineLimit(2)
                 }
             }
+            .refreshable {
+                await viewModel.fetchBlogPosts()
+            }
         }
     }
 }
